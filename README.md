@@ -1,50 +1,109 @@
-# Welcome to your Expo app 👋
+# Mangakalot Notification App 📢📚
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este é um aplicativo que monitora os favoritos do site **Manganato** e notifica o usuário sempre que novos capítulos forem lançados. O projeto foi desenvolvido com **FastAPI, React Native e Selenium** para facilitar a leitura de mangás sem precisar verificar manualmente as atualizações.
 
-## Get started
+## 🛠 Tecnologias Utilizadas
 
-1. Install dependencies
+- **Python (FastAPI, Selenium)** → Para a API backend e scraping dos capítulos de mangá.
+- **React Native (Expo, TypeScript)** → Para o aplicativo mobile que exibe notificações dos novos capítulos.
+- **SQLite** → Para armazenamento local das notificações não lidas.
+- **SQLAlchemy** → ORM utilizado para manipulação do banco de dados.
 
-   ```bash
+---
+
+## 📌 Funcionalidades
+
+✅ **Monitoramento Automático**: O bot acessa a página de favoritos do Manganato periodicamente para verificar novas atualizações.
+
+✅ **Banco de Dados**: Notificações são armazenadas em um banco SQLite, permitindo controle sobre quais já foram lidas.
+
+✅ **Notificações no App**: O usuário recebe uma notificação sempre que um novo capítulo for encontrado.
+
+✅ **Abertura Direta do Capítulo**: Ao clicar na notificação, o aplicativo redireciona para a página do capítulo no navegador.
+
+✅ **Marcar como Lido**: O usuário pode remover notificações da lista de não lidas.
+
+---
+
+## 🚀 Como Instalar e Usar
+
+### 🔧 Configuração do Backend (FastAPI)
+
+1. **Clone o repositório**:
+   ```sh
+   git clone https://github.com/KauaLima157/Mangakalot-Notification-App.git
+   cd Mangakalot-Notification-App
+   ```
+
+2. **Crie um ambiente virtual (opcional, recomendado)**:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # Linux/macOS
+   venv\Scripts\activate  # Windows
+   ```
+
+3. **Instale as dependências**:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. **Configure o Selenium e o ChromeDriver**:
+   - Baixe o [ChromeDriver](https://chromedriver.chromium.org/downloads) compatível com sua versão do Google Chrome.
+   - Substitua o caminho do ChromeDriver no arquivo `MangaNotic.py`:
+     ```python
+     chrome_service = Service("C:\\Users\\SeuUsuario\\Downloads\\chromedriver.exe")
+     ```
+
+5. **Execute a API FastAPI**:
+   ```sh
+   uvicorn Main:app --reload
+   ```
+   O servidor será iniciado em `http://127.0.0.1:8000`.
+
+---
+
+### 📱 Configuração do Frontend (React Native)
+
+1. **Instale o Expo CLI (caso não tenha)**:
+   ```sh
+   npm install -g expo-cli
+   ```
+
+2. **Instale as dependências**:
+   ```sh
+   cd app
    npm install
    ```
 
-2. Start the app
-
-   ```bash
-    npx expo start
+3. **Execute o aplicativo**:
+   ```sh
+   expo start
    ```
+   Isso abrirá o Metro Bundler no navegador. Você pode testar o app no seu celular escaneando o QR Code com o Expo Go.
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🌐 Endpoints da API
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- `POST /update-notifications` → Busca novos capítulos e os salva no banco.
+- `GET /unread-notifications` → Retorna notificações não lidas.
+- `PUT /mark-as-read/{id}` → Marca uma notificação como lida.
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 📝 Melhorias Futuras
 
-```bash
-npm run reset-project
-```
+- [ ] Melhorar o sistema de notificações para suportar push notifications no celular.
+- [ ] Adicionar suporte para múltiplos sites de mangá além do Mangakakalot.
+- [ ] Criar um painel web para gerenciamento das notificações.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 💜 Licença
 
-To learn more about developing your project with Expo, look at the following resources:
+Este projeto é de código aberto e pode ser modificado conforme necessário.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+📩 **Desenvolvido por [Kauã Lima](https://github.com/KauaLima157)**  
+Se tiver sugestões ou quiser contribuir, fique à vontade para abrir um **Pull Request** ou **Issue**. 🚀
 
-## Join the community
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
