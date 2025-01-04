@@ -1,6 +1,6 @@
 # Mangakalot Notification App 📢📚
 
-Este é um aplicativo que monitora os favoritos do site **Manganato** e notifica o usuário sempre que novos capítulos forem lançados. O projeto foi desenvolvido com **FastAPI, React Native e Selenium** para facilitar a leitura de mangás sem precisar verificar manualmente as atualizações.
+Este é um aplicativo que monitora os favoritos do site **Mangakakalot** e notifica o usuário sempre que novos capítulos forem lançados. O projeto foi desenvolvido com **FastAPI, React Native e Selenium** para facilitar a leitura de mangás sem precisar verificar manualmente as atualizações.
 
 ## 🛠 Tecnologias Utilizadas
 
