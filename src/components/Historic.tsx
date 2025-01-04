@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Linking, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import api from '../app/api';
 
 interface Notification {
@@ -10,57 +10,35 @@ interface Notification {
     image_url: string;
 }
 
-const Notifications = () => {
+const History = () => {
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
     useEffect(() => {
-        fetchNotifications();
+        fetchReadNotifications();
     }, []);
 
-    const fetchNotifications = async () => {
+    const fetchReadNotifications = async () => {
         try {
-            await api.post('/update-notifications');
-            await api.post("/sync-read-status");
-            const response = await api.get<Notification[]>('/unread-notifications?skip=0&limit=10');
+            const response = await api.get<Notification[]>('/read-notifications?skip=0&limit=10');
             setNotifications(response.data);
         } catch (error) {
-            console.error('Error fetching notifications:', error);
-        }
-    };
-
-    const handlePressNotification = async (notification: Notification) => {
-        try {
-            await api.put(`/mark-as-read/${notification.id}`);
-            
-            // Atualizar a lista de notificações no frontend
-            setNotifications((prevNotifications) =>
-                prevNotifications.filter((item) => item.id !== notification.id)
-            );
-            Linking.openURL(notification.chapter_url).catch((err) =>
-                console.error('Failed to open URL:', err)
-            );
-        } catch (error) {
-            console.error('Error marking notification as read:', error);
+            console.error('Error fetching read notifications:', error);
         }
     };
 
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('../images/logo-png.png')}/>
             <FlatList
                 data={notifications}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }: { item: Notification }) => (
-                    <TouchableOpacity
-                        onPress={() => handlePressNotification(item)}
-                        style={styles.notification}
-                    >
+                    <View style={styles.notification}>
                         <Image source={{ uri: item.image_url }} style={styles.image} />
                         <View style={styles.textContainer}>
                             <Text style={styles.notificationTitle}>{item.title}</Text>
                             <Text style={styles.link}>{item.chapter}</Text>
                         </View>
-                    </TouchableOpacity>
+                    </View>
                 )}
             />
         </View>
@@ -69,10 +47,10 @@ const Notifications = () => {
 
 const styles = StyleSheet.create({
     container: { flex: 1, padding: 10, backgroundColor: '#f9f9f9',},
-    logo: { width: 100, height: 100, marginBottom: 25,},
     notification: {
         flexDirection: 'row',
         marginBottom: 15,
+        backgroundColor: '#fff',
         borderRadius: 10,
         padding: 10,
         shadowColor: '#000',
@@ -98,7 +76,6 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         margin: 0,
     },
-    link: { color: 'blue', textDecorationLine: 'none', fontSize: 14, padding: 0, margin: 0 },
+    link: { color: 'black', textDecorationLine: 'none', fontSize: 14, padding: 0, margin: 0 },
 });
-
-export default Notifications;
+export default History;
