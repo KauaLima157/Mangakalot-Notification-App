@@ -85,7 +85,9 @@ Este é um aplicativo que monitora os favoritos do site **Mangakakalot** e notif
 ## 🌐 Endpoints da API
 
 - `POST /update-notifications` → Busca novos capítulos e os salva no banco.
+- `POST /sync-read-status` → Sincroniza o banco de dados caso haja possíveis alterações.
 - `GET /unread-notifications` → Retorna notificações não lidas.
+- `GET /read-notifications` → Retorna notificações lidas.
 - `PUT /mark-as-read/{id}` → Marca uma notificação como lida.
 
 ---
