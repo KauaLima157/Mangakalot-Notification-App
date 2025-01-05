@@ -64,20 +64,19 @@ Este é um aplicativo que monitora os favoritos do site **Mangakakalot** e notif
 
 ### 📱 Configuração do Frontend (React Native)
 
-1. **Instale o Expo CLI (caso não tenha)**:
+1. **Inicialize novo expo app**:
    ```sh
-   npm install -g expo-cli
+   npx create-expo-app@latest myApp
    ```
 
-2. **Instale as dependências**:
+2. **Navegue pelo diretório**:
    ```sh
-   cd app
-   npm install
+   cd myApp
    ```
 
 3. **Execute o aplicativo**:
    ```sh
-   expo start
+   npm start
    ```
    Isso abrirá o Metro Bundler no navegador. Você pode testar o app no seu celular escaneando o QR Code com o Expo Go.
 
