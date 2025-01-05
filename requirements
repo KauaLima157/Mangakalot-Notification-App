@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+selenium
+requests
+plyer
+pillow
+sqlalchemy
+databases
+pydantic
+psycopg2-binary
+sqlite
